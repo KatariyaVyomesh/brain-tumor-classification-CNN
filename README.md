@@ -28,9 +28,13 @@ Install the required packages using:pip install tensorflow numpy pillow
 
 # model Architecture
 The model is a Convolutional Neural Network (CNN) built using TensorFlow and Keras, consisting of:
+
 -> 3 Convolutional layers with ReLU activation and MaxPooling
+
 -> A Flatten layer to transform image data for classification
+
 -> 2 Dense layers with a dropout layer to reduce overfitting
+
 -> Binary output (cancer or no cancer) with a sigmoid activation
 
 -------------------------------------------------------------------------------------------
@@ -38,9 +42,13 @@ The model is a Convolutional Neural Network (CNN) built using TensorFlow and Ker
 Run the following code to train the model:
 
 import tensorflow as tf
+
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
 from tensorflow.keras.models import Sequential
+
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+
 # Define paths
 train_dir = 'brain_tumor_data'  # Folder containing "yes" and "no" subfolders
 # Data Preprocessing
@@ -113,7 +121,9 @@ To make predictions on a new image, load the trained model and use the followin
 from tensorflow.keras.preprocessing import image
 import numpy as np
 import tensorflow as tf
+
 # Load the model
+
 model = tf.keras.models.load_model('brain_tumor_classifier_model.h5')
 def predict_image(image_path, model):
     img = image.load_img(image_path, target_size=(150, 150))
