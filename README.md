@@ -11,9 +11,11 @@ This project is a deep learning-based approach to classify brain MRI images as e
 ## Dataset Structure
 Ensure the dataset is structured as follows:
 brain_tumor_data/ ├── yes/       
-# Contains 155 images labeled as "cancer" in JPG format 
+
+-> Contains 155 images labeled as "cancer" in JPG format 
+
 ├── no/        
-# Contains 98 images labeled as "no cancer" in JPG format
+->Contains 98 images labeled as "no cancer" in JPG format
 
 -----------------------------------------------------------------------------------------------
 # Requirements
@@ -61,6 +63,7 @@ train_generator = train_datagen.flow_from_directory(
     class_mode='binary',
     subset='training'
 )
+
 validation_generator = train_datagen.flow_from_directory(
     train_dir,
     target_size=(150, 150),
@@ -68,7 +71,9 @@ validation_generator = train_datagen.flow_from_directory(
     class_mode='binary',
     subset='validation'
 )
+
 # Build the CNN model
+
 model = Sequential([
     Conv2D(32, (3, 3), activation='relu', input_shape=(150, 150, 3)),
     MaxPooling2D(2, 2),
@@ -81,9 +86,13 @@ model = Sequential([
     Dropout(0.5),
     Dense(1, activation='sigmoid')
 ])
+
 # Compile the model
+
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
 # Train the model
+
 history = model.fit(
     train_generator,
     epochs=10,
@@ -95,11 +104,15 @@ model.save('brain_tumor_classifier_model.h5')
 -----------------------------------------------------------------------------------------
 
 # Prediction on New Images
+
 from tensorflow.keras.preprocessing import image
+
 import numpy as np
+
 import tensorflow as tf
 
 # Load the model
+
 model = tf.keras.models.load_model('brain_tumor_classifier_model.h5')
 
 def predict_image(image_path, model):
@@ -119,12 +132,15 @@ def predict_image(image_path, model):
 To make predictions on a new image, load the trained model and use the following code:
 
 from tensorflow.keras.preprocessing import image
+
 import numpy as np
+
 import tensorflow as tf
 
 # Load the model
 
 model = tf.keras.models.load_model('brain_tumor_classifier_model.h5')
+
 def predict_image(image_path, model):
     img = image.load_img(image_path, target_size=(150, 150))
     img_array = image.img_to_array(img) / 255.0
@@ -135,8 +151,11 @@ def predict_image(image_path, model):
         print("Prediction: Cancer detected")
     else:
         print("Prediction: No cancer detected")
+
 # Predict on a new image
+
 image_path = 'path_to_image.jpg'  # Replace with the path to your test image
+
 predict_image(image_path, model)
 
 -----------------------------------------------------------------------------------------------
